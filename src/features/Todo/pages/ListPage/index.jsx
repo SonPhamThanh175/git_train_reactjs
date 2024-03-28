@@ -1,35 +1,42 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import TodoList from '../../components/TodoList';
-import { useLocation } from 'react-router-dom';
 import queryString from 'query-string';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useHistory } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min';
+import TodoList from '../../components/TodoList';
+import TodoForm from '../../components/TodoForm';
 
 function ListPage(props) {
     const initTodoList = [
         {
             id: 1,
-            status: "new",
-            title: "Eat",
+            status: 'new',
+            title: 'Eat',
         },
         {
             id: 2,
-            status: "completed",
-            title: "Sleep",
+            status: 'completed',
+            title: 'Sleep',
         },
         {
             id: 3,
-            status: "new",
-            title: "Code",
+            status: 'new',
+            title: 'Code',
         },
     ];
 
     const location = useLocation();
+    const history = useHistory();
+    const match = useRouteMatch();
     const [todoList, setTodoList] = useState(initTodoList);
     const [filterStatus, setFilterStatus] = useState(() => {
         const params = queryString.parse(location.search);
-
         return params.status || 'all';
     });
+
+    useEffect(() => {
+        const params = queryString.parse(location.search);
+        setFilterStatus(params.status || 'all');
+    }, [location.search]);
 
     const handleTodoClick = (todo, idx) => {
         const newTodoList = [...todoList];
@@ -42,23 +49,47 @@ function ListPage(props) {
     };
 
     const handldShowAllClick = () => {
-        setFilterStatus('all');
+        // setFilterStatus('all');
+        const queryParams = { status: 'all' };
+        history.push({
+            pathname: match.path,
+            search: queryString.stringify(queryParams),
+        });
     };
-    
+
     const handldShowCompletedClick = () => {
-        setFilterStatus('completed');
+        // setFilterStatus('completed');
+        const queryParams = { status: 'completed' };
+        history.push({
+            pathname: match.path,
+            search: queryString.stringify(queryParams),
+        });
     };
-    
+
     const handldShowNewClick = () => {
-        setFilterStatus('new');
+        // setFilterStatus('new');
+        const queryParams = { status: 'new' };
+        history.push({
+            pathname: match.path,
+            search: queryString.stringify(queryParams),
+        });
     };
 
-    const rederedTodoList = todoList.filter(todo => filterStatus === 'all' || filterStatus === todo.status);
+    const rederedTodoList = todoList.filter(
+        (todo) => filterStatus === 'all' || filterStatus === todo.status,
+    );
 
+    const handleTodoFormSubmit = (values) => {
+        console.log('Form submit :' ,values);
+    }
     return (
         <div>
+            <h3>Todo Form </h3>
+            <TodoForm onSubmit={handleTodoFormSubmit}/>
+
+
             <h3>To do list</h3>
-            <TodoList 
+            <TodoList
                 todoList={rederedTodoList}
                 onTodoClick={handleTodoClick}
             />

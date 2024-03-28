@@ -2,8 +2,17 @@ import { NavLink, Route, Switch } from 'react-router-dom/cjs/react-router-dom.mi
 import AlbumFeature from './features/Album/pages';
 import TodoFeature from './features/Todo/pages';
 import NotFound from './components/NotFound';
+import { useEffect } from 'react';
+import productsApi from './api/productApi';
 
 function App() {
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const productList = await productsApi.getAll();
+      console.log(productList);
+    };
+    fetchProducts();
+  }, []);
   return (
     <div className="App">
       <header className="App-header">
