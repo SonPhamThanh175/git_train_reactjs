@@ -33,10 +33,10 @@ function ListPage(props) {
         return params.status || 'all';
     });
 
-    useEffect(() => {
-        const params = queryString.parse(location.search);
-        setFilterStatus(params.status || 'all');
-    }, [location.search]);
+    // useEffect(() => {
+    //     const params = queryString.parse(location.search);
+    //     setFilterStatus(params.status || 'all');
+    // }, [location.search]);
 
     const handleTodoClick = (todo, idx) => {
         const newTodoList = [...todoList];

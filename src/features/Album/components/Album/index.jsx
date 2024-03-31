@@ -14,6 +14,7 @@ function Album({album}) {
       </div>
         <p className='album_name'>{album.name}</p>
     </div>
+    
   )
 }
 
