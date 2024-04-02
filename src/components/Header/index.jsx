@@ -1,76 +1,111 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import TextField from '@mui/material/TextField';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import { useState } from 'react';
+import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+import styles from './styles.module.css';
 
-function Header(props) {
+export default function Header() {
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
     return (
-        <div className='Header'>
-            <nav class='navbar navbar-expand-lg navbar-light bg-light'>
-                <div class='container-fluid'>
-                    <a
-                        class='navbar-brand'
-                        href='#'
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position='static'>
+                <Toolbar>
+                    <GitHubIcon />
+                    <Typography
+                        variant='h6'
+                        component='div'
+                        sx={{ flexGrow: 1 }}
                     >
-                        Navbar
-                    </a>
-                    <button
-                        class='navbar-toggler'
-                        type='button'
-                        data-bs-toggle='collapse'
-                        data-bs-target='#navbarNav'
-                        aria-controls='navbarNav'
-                        aria-expanded='false'
-                        aria-label='Toggle navigation'
+                        <NavLink
+                            to='/'
+                            className={styles.link}
+                        >
+                            {' '}
+                            ezCode
+                        </NavLink>
+                    </Typography>
+                    <NavLink
+                        to='/todos'
+                        className={styles.link}
                     >
-                        <span class='navbar-toggler-icon'></span>
-                    </button>
-                    <div
-                        class='collapse navbar-collapse'
-                        id='navbarNav'
+                        <Button color='inherit'>Todo</Button>
+                    </NavLink>
+                    <NavLink
+                        to='/albums'
+                        className={styles.link}
                     >
-                        <ul class='navbar-nav'>
-                            <li class='nav-item'>
-                                <a
-                                    class='nav-link active'
-                                    aria-current='page'
-                                    href='#'
-                                >
-                                    Home
-                                </a>
-                            </li>
-                            <li class='nav-item'>
-                                <a
-                                    class='nav-link'
-                                    href='#'
-                                >
-                                    Features
-                                </a>
-                            </li>
-                            <li class='nav-item'>
-                                <a
-                                    class='nav-link'
-                                    href='#'
-                                >
-                                    Pricing
-                                </a>
-                            </li>
-                            <li class='nav-item'>
-                                <a
-                                    class='nav-link disabled'
-                                    href='#'
-                                    tabindex='-1'
-                                    aria-disabled='true'
-                                >
-                                    Disabled
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
+                        <Button color='inherit'>Album</Button>
+                    </NavLink>
+                    <Button color='inherit' onClick={handleClickOpen}>Register</Button>
+                </Toolbar>
+            </AppBar>
+            <Dialog
+                disableBackdropClick
+                disableEscapeKeyDown
+                open={open}
+                onClose={handleClose}
+                PaperProps={{
+                    component: 'form',
+                    onSubmit: (event) => {
+                        event.preventDefault();
+                        const formData = new FormData(event.currentTarget);
+                        const formJson = Object.fromEntries(formData.entries());
+                        const email = formJson.email;
+                        console.log(email);
+                        handleClose();
+                    },
+                }}
+            >
+                <DialogContent>
+                    <DialogContentText>
+                        To subscribe to this website, please enter your email address here. We will
+                        send updates occasionally.
+                    </DialogContentText>
+                    <TextField
+                        autoFocus
+                        required
+                        margin='dense'
+                        id='name'
+                        name='email'
+                        label='Email Address'
+                        type='email'
+                        fullWidth
+                        variant='standard'
+                    />
+                    <TextField
+                        autoFocus
+                        required
+                        margin='dense'
+                        id='name'
+                        name='password'
+                        label='Your password'
+                        type='password'
+                        fullWidth
+                        variant='standard'
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button type='submit'>Subscribe</Button>
+                </DialogActions>
+            </Dialog>
+        </Box>
     );
 }
-
-Header.propTypes = {};
-
-export default Header;

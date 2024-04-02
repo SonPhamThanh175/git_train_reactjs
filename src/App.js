@@ -1,11 +1,11 @@
-import { NavLink, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import AlbumFeature from './features/Album/pages';
-import TodoFeature from './features/Todo/pages';
-import NotFound from './components/NotFound';
 import { useEffect } from 'react';
+import { NavLink, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import productsApi from './api/productApi';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import AlbumFeature from './features/Album/pages';
+import CounterFeature from './features/Counter';
+import TodoFeature from './features/Todo/pages';
 
 function App() {
     useEffect(() => {
@@ -16,47 +16,19 @@ function App() {
         fetchProducts();
     }, []);
     return (
-        // <div className="App">
-        //   <header className="App-header">
-        //     <p>
-        //       Home Page
-        //       <p>
-        //         <NavLink to = "/todos" activeClassName = "active-menu">Todos</NavLink>
-        //       </p>
-        //       <p>
-        //         <NavLink to = "/albums" activeClassName = "active-menu">Albums</NavLink>
-        //       </p>
-
-        //       <Switch>
-        //         <Route path="/" component = {TodoFeature} exact/>
-        //         <Route path="/todos" component = {TodoFeature}/>
-        //         <Route path="/albums" component = {AlbumFeature}/>
-
-        //         <Route component={NotFound}/>
-        //       </Switch>
-        //     </p>
-        //   </header>
-        // </div>
         <div className='App'>
-            <Header />
-            <p>
-                <p>
-                    <NavLink
-                        to='/todos'
-                        activeClassName='active-menu'
-                    >
-                        Todos
-                    </NavLink>
-                </p>
-                <p>
-                    <NavLink
-                        to='/albums'
-                        activeClassName='active-menu'
-                    >
-                        Albums
-                    </NavLink>
-                </p>
+            <Header/>
+            <p  style={{
+                margin: 20
+            }}>
                 <Switch>
+                    {/* <Redirect from = '/home' to = '/' exact /> */}
+                     {/* <Redirect from = '/post-list/:postId' to = '/posts/:postId' exact /> */}
+                    <Route
+                        path='/'
+                        component={CounterFeature}
+                        exact
+                    />
                     <Route
                         path='/todos'
                         component={TodoFeature}
@@ -65,11 +37,11 @@ function App() {
                         path='/albums'
                         component={AlbumFeature}
                     />
-                    <Route component={NotFound} />
+                    {/* <Route component={NotFound} /> */}
                 </Switch>
             </p>
 
-            <Footer />
+            <Footer/>
         </div>
     );
 }
