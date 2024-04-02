@@ -33,10 +33,10 @@ function ListPage(props) {
         return params.status || 'all';
     });
 
-    // useEffect(() => {
-    //     const params = queryString.parse(location.search);
-    //     setFilterStatus(params.status || 'all');
-    // }, [location.search]);
+    useEffect(() => {
+        const params = queryString.parse(location.search);
+        setFilterStatus(params.status || 'all');
+    }, [location.search]);
 
     const handleTodoClick = (todo, idx) => {
         const newTodoList = [...todoList];
@@ -47,6 +47,7 @@ function ListPage(props) {
         };
         setTodoList(newTodoList);
     };
+    // console.log(history);
 
     const handldShowAllClick = () => {
         // setFilterStatus('all');
@@ -80,7 +81,14 @@ function ListPage(props) {
     );
 
     const handleTodoFormSubmit = (values) => {
-        console.log('Form submit :' ,values);
+        // console.log('Form submit :' ,values);
+        const newTodo = {
+            id :todoList.length + 1,
+            title : values.title,
+            status : 'new',
+        }
+        const newTodoList = [...todoList,newTodo]
+        setTodoList(newTodoList)
     }
     return (
         <div>
