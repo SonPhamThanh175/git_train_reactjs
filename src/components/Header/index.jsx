@@ -12,6 +12,9 @@ import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import styles from './styles.module.css';
+import Register from 'features/Auth/components/Register';
+import Avatar from '@mui/material/Avatar';
+import PasswordField from 'components/form-controls/PasswordField';
 
 export default function Header() {
     const [open, setOpen] = useState(false);
@@ -23,6 +26,8 @@ export default function Header() {
     const handleClose = () => {
         setOpen(false);
     };
+    // const value = []
+    // console.log(value);
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position='static'>
@@ -67,17 +72,15 @@ export default function Header() {
                         event.preventDefault();
                         const formData = new FormData(event.currentTarget);
                         const formJson = Object.fromEntries(formData.entries());
-                        const email = formJson.email;
-                        console.log(email);
+                        console.log(formJson);
+                        // value.push(formJson);
+                        
                         handleClose();
                     },
                 }}
             >
                 <DialogContent>
-                    <DialogContentText>
-                        To subscribe to this website, please enter your email address here. We will
-                        send updates occasionally.
-                    </DialogContentText>
+                    <Register/>
                     <TextField
                         autoFocus
                         required
@@ -88,6 +91,18 @@ export default function Header() {
                         type='email'
                         fullWidth
                         variant='standard'
+                        helperText='please enter your email address'
+                    />
+                     <TextField
+                        autoFocus
+                        required
+                        margin='dense'
+                        id='name'
+                        name='name'
+                        label='Name'
+                        type='name'
+                        fullWidth
+                        variant='standard'
                     />
                     <TextField
                         autoFocus
@@ -95,15 +110,23 @@ export default function Header() {
                         margin='dense'
                         id='name'
                         name='password'
-                        label='Your password'
+                        label='Password'
                         type='password'
                         fullWidth
                         variant='standard'
                     />
+                    {/* <PasswordField/> */}
                 </DialogContent>
                 <DialogActions>
+                <Button type='submit'
+                            variant='contained'
+                            color='primary'
+                            fullWidth
+                    >
+                        Subscribe</Button>
+                </DialogActions>
+                <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
-                    <Button type='submit'>Subscribe</Button>
                 </DialogActions>
             </Dialog>
         </Box>

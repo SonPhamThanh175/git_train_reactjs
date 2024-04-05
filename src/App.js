@@ -6,6 +6,7 @@ import Header from './components/Header';
 import AlbumFeature from './features/Album/pages';
 import CounterFeature from './features/Counter';
 import TodoFeature from './features/Todo/pages';
+import NotFound from 'components/NotFound';
 
 function App() {
     useEffect(() => {
@@ -24,11 +25,11 @@ function App() {
                 <Switch>
                     {/* <Redirect from = '/home' to = '/' exact /> */}
                      {/* <Redirect from = '/post-list/:postId' to = '/posts/:postId' exact /> */}
-                    <Route
+                    {/* <Route
                         path='/'
                         component={CounterFeature}
                         exact
-                    />
+                    /> */}
                     <Route
                         path='/todos'
                         component={TodoFeature}
@@ -37,7 +38,7 @@ function App() {
                         path='/albums'
                         component={AlbumFeature}
                     />
-                    {/* <Route component={NotFound} /> */}
+                    <Route component={NotFound} />
                 </Switch>
             </p>
 
