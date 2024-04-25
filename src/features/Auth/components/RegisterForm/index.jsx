@@ -1,32 +1,27 @@
-import { yupResolver } from '@hookform/resolvers/yup';
-import { LockOutlined } from '@material-ui/icons';
-import { Button, Typography } from '@mui/material';
-import Avatar from '@mui/material/Avatar';
-import { makeStyles } from '@mui/styles';
-import InputField from 'components/form-controls/InputField';
-import PasswordField from 'components/form-controls/PasswordField';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { useForm } from 'react-hook-form';
-import TextField from '@mui/material/TextField';
-
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import InputField from '../../../../components/form-controls/InputField';
+import { Avatar, Button, Typography, makeStyles } from '@material-ui/core';
+import { LockOutlined } from '@material-ui/icons';
+import PasswordField from 'components/form-controls/PasswordField';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     root: {
-        paddingTop: '20px',
+        paddingTop: theme.spacing(2)
     },
     avatar: {
         margin: '0 auto',
-        backgroundColor: 'red',
+        backgroundColor: theme.palette.secondary.main,
     },
-
     title: {
         textAlign: 'center',
-        margin: '2 0',
+        paddingTop: theme.spacing(2 ,0 ,4 ,0)
     },
-
     submit: {
-        marginTop: '15px',
+        marginTop: theme.spacing(2)
     },
 }));
 
@@ -34,23 +29,49 @@ RegisterForm.propTypes = {
     allSubmit: PropTypes.func,
 };
 
-function RegisterForm({ props }) {
+function RegisterForm(props) {
     const classes = useStyles();
 
-    const schema = yup.object().shape({});
+    const schema = yup.object().shape({
+        // fullName: yup
+        //     .string()
+        //     .required('Please enter your Full Name')
+        //     .test('should has at least 2 words','Please enter at least 2 words.', (value)=>{
+        //         return value.split(' ').length >= 2;
+        //     }),
+        email : yup
+            .string()
+            .required('Please enter your email address')
+            .email('Please enter a valid email address'),
+        password: yup
+            .string()
+            .required('Please enter your password')
+            // .min(6 , 'Please enter at least 6 characters')
+    })
+
+
     const form = useForm({
-        defaultValue: {
-            fullName: ' ',
-            email: ' ',
-            password: ' ',
-            retypePassword: ' ',
+        defaultValues: {
+            fullName: '',
+            email: '',
+            password: '',
+            retypePassword: '',
         },
         resolver: yupResolver(schema),
-    });
-    const handleSubmitForm = (data) => {
-        console.log('debug data ->', data);
-    };
+        // shouldUnregister: true,
+      })
+      
+    
+      
+      const handleSubmit = (values) => {
+        console.log(form.errors)
+        const { onSubmit } = props;
+        if (onSubmit) {
+            onSubmit(values);
+        }
 
+        form.reset();
+    };
     return (
         <div className={classes.root}>
             <Avatar className={classes.avatar}>
@@ -60,71 +81,41 @@ function RegisterForm({ props }) {
             <Typography
                 className={classes.title}
                 component='h3'
-                variant='h5'
+                varrian='h5'
             >
-                Create an Account
+                Create An Account
             </Typography>
 
-            <form
-                onSubmit={() => {
-                    form.handleSubmit(handleSubmitForm);
-                }}
-            >
-                {/* <Button
+            <form onSubmit={form.handleSubmit(handleSubmit)}>
+                <InputField
+                    name='fullName'
+                    label='Full Name'
+                    form={form}
+                />
+                <InputField
+                    name='email'
+                    label='Email'
+                    form={form}
+                />
+                <PasswordField
+                    name='password'
+                    label='Password'
+                    form={form}
+                />
+                <PasswordField
+                    name='retypePassword'
+                    label='Retype Password'
+                    form={form}
+                />
+                <Button
                     type='submit'
                     className={classes.submit}
                     variant='contained'
                     color='primary'
                     fullWidth
-                    // onClick={(e) => e?.preventDefault()}
                 >
                     Create an Account
                 </Button>
-
-                <TextField
-                        autoFocus
-                        required
-                        margin='dense'
-                        id='name'
-                        name='email'
-                        label='Email Address'
-                        type='email'
-                        fullWidth
-                        variant='standard'
-                    />
-                     <TextField
-                        autoFocus
-                        required
-                        margin='dense'
-                        id='name'
-                        name='name'
-                        label='Name'
-                        type='name'
-                        fullWidth
-                        variant='standard'
-                    />
-                    <TextField
-                        autoFocus
-                        required
-                        margin='dense'
-                        id='password'
-                        name='password'
-                        label='Password'
-                        type='password'
-                        fullWidth
-                        variant='standard'
-                    />
-
-                <PasswordField
-                    name='password'
-                    label='Password'
-                    form={form}
-            />
-                <PasswordField
-                    name='retypePassword'
-                    label='Retype Password'
-                    form={form}
-                />  */}
             </form>
         </div>
     );

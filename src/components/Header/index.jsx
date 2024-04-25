@@ -1,22 +1,32 @@
-import GitHubIcon from '@mui/icons-material/GitHub';
+import { makeStyles } from '@material-ui/core/styles';
+import JavascriptIcon from '@mui/icons-material/Javascript';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import TextField from '@mui/material/TextField';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import * as React from 'react';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+import Register from '../../features/Auth/components/Register';
 import styles from './styles.module.css';
-import Register from 'features/Auth/components/Register';
-import Avatar from '@mui/material/Avatar';
-import PasswordField from 'components/form-controls/PasswordField';
 
-export default function Header() {
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+    },
+    menuButton: {
+        marginRight: theme.spacing(2),
+    },
+    title: {
+        flexGrow: 1,
+    },
+}));
+
+export default function ButtonAppBar() {
     const [open, setOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -26,25 +36,18 @@ export default function Header() {
     const handleClose = () => {
         setOpen(false);
     };
-    // const value = []
-    // console.log(value);
+    const classes = useStyles();
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position='static'>
                 <Toolbar>
-                    <GitHubIcon />
+                    <JavascriptIcon className={classes.menuButton} />
                     <Typography
                         variant='h6'
                         component='div'
                         sx={{ flexGrow: 1 }}
                     >
-                        <NavLink
-                            to='/'
-                            className={styles.link}
-                        >
-                            {' '}
-                            ezCode
-                        </NavLink>
+                        <Link to='/'>Font-end</Link>
                     </Typography>
                     <NavLink
                         to='/todos'
@@ -62,8 +65,8 @@ export default function Header() {
                 </Toolbar>
             </AppBar>
             <Dialog
-                disableBackdropClick
                 disableEscapeKeyDown
+                disableBackdropClick
                 open={open}
                 onClose={handleClose}
                 PaperProps={{
@@ -72,59 +75,15 @@ export default function Header() {
                         event.preventDefault();
                         const formData = new FormData(event.currentTarget);
                         const formJson = Object.fromEntries(formData.entries());
-                        console.log(formJson);
-                        // value.push(formJson);
-                        
+                        const email = formJson.email;
+                        console.log(email);
                         handleClose();
                     },
                 }}
             >
                 <DialogContent>
                     <Register/>
-                    <TextField
-                        autoFocus
-                        required
-                        margin='dense'
-                        id='name'
-                        name='email'
-                        label='Email Address'
-                        type='email'
-                        fullWidth
-                        variant='standard'
-                        helperText='please enter your email address'
-                    />
-                     <TextField
-                        autoFocus
-                        required
-                        margin='dense'
-                        id='name'
-                        name='name'
-                        label='Name'
-                        type='name'
-                        fullWidth
-                        variant='standard'
-                    />
-                    <TextField
-                        autoFocus
-                        required
-                        margin='dense'
-                        id='name'
-                        name='password'
-                        label='Password'
-                        type='password'
-                        fullWidth
-                        variant='standard'
-                    />
-                    {/* <PasswordField/> */}
                 </DialogContent>
-                <DialogActions>
-                <Button type='submit'
-                            variant='contained'
-                            color='primary'
-                            fullWidth
-                    >
-                        Subscribe</Button>
-                </DialogActions>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
                 </DialogActions>

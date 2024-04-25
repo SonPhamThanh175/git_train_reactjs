@@ -1,12 +1,12 @@
+
 import { useEffect } from 'react';
 import { NavLink, Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import productsApi from './api/productApi';
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 import Header from './components/Header';
 import AlbumFeature from './features/Album/pages';
-import CounterFeature from './features/Counter';
 import TodoFeature from './features/Todo/pages';
-import NotFound from 'components/NotFound';
+import NotFound from './components/NotFound';
 
 function App() {
     useEffect(() => {
@@ -41,8 +41,6 @@ function App() {
                     <Route component={NotFound} />
                 </Switch>
             </p>
-
-            <Footer/>
         </div>
     );
 }

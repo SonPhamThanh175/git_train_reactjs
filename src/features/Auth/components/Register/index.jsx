@@ -1,19 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { unwrapResult } from '@reduxjs/toolkit';
+import { register } from 'features/Auth/userSlice';
+import { useDispatch } from 'react-redux';
 import RegisterForm from '../RegisterForm';
 
-Register.propTypes = {};
-
 function Register(props) {
-    const handleSubmit = (value) => {
-        
-        console.log('Form Submit', value);
-    };
-    return (
-        <div>
-            <RegisterForm onSubmit = {handleSubmit}/>
-        </div>
-    );
+    const dispatch = useDispatch();
+
+    const handleSubmit = async (values) => {
+      console.log('Form submit',values);
+      const action = register(values)
+      console.log(action);
+      // const resultAction = await dispatch(action)
+      // const user = unwrapResult(resultAction)
+      // console.log('New user',user);
+    }
+  return (
+    <div>
+        <RegisterForm onSubmit = {handleSubmit}/>
+    </div>
+  )
 }
 
-export default Register;
+Register.propTypes = {}
+
+export default Register
