@@ -64,7 +64,6 @@ function RegisterForm(props) {
     
       
       const handleSubmit = (values) => {
-        console.log(form.errors)
         const { onSubmit } = props;
         if (onSubmit) {
             onSubmit(values);

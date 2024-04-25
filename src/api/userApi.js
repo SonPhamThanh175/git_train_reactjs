@@ -6,5 +6,6 @@ const userApi = {
         return axiosClient.post(url,data)
     },
 }
+// console.log('userApi',userApi);
 
 export default userApi
