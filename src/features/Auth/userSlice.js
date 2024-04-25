@@ -7,8 +7,8 @@ export const register = createAsyncThunk(
       console.log('payload',payload);
         //Call API to register
         const data = await userApi.register(payload);
-        console.log('data',data);
-        debugger
+        // console.log('data',data);
+
         // Save data to local storage
         localStorage.setItem('access_token_register', data.jwt);
         localStorage.setItem('user', JSON.stringify(data.user));
@@ -29,11 +29,6 @@ const userSlice = createSlice({
 
     // Reducer là 1 object -> Mỗi key là 1 trường hợp ( là 1 hàm  )
     reducers: {},
-    // extraReducers: {
-    //     [register.fulfilled] : (state,action) => {
-    //         state.current = action.payload;
-    //     }
-    // },
     // extraReducers: (builder) => {
     //     builder.addCase(register.fulfilled, (state, action) => {
     //       state.current = action.payload;
