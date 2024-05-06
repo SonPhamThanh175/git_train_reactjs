@@ -38,37 +38,29 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-RegisterForm.propTypes = {
+LoginForm.propTypes = {
     allSubmit: PropTypes.func,
 };
 
-function RegisterForm(props) {
+function LoginForm(props) {
     const classes = useStyles();
 
     const schema = yup.object().shape({
-        // fullName: yup
-        //     .string()
-        //     .required('Please enter your Full Name')
-        //     .test('should has at least 2 words','Please enter at least 2 words.', (value)=>{
-        //         return value.split(' ').length >= 2;
-        //     }),
-        email : yup
+
+        identifier : yup
             .string()
             .required('Please enter your email address')
             .email('Please enter a valid email address'),
         password: yup
             .string()
             .required('Please enter your password')
-            // .min(6 , 'Please enter at least 6 characters')
     })
 
 
     const form = useForm({
         defaultValues: {
-            fullName: '',
-            email: '',
+            identifier: '',
             password: '',
-            retypePassword: '',
         },
         resolver: yupResolver(schema),
         // shouldUnregister: true,
@@ -87,11 +79,11 @@ function RegisterForm(props) {
         // history.push('/albums');
     };
     const history = useHistory()
-    const {isSubmitting} = form.formState
+    // const {isSubmitting} = form.formState
 
     return (
         <div className={classes.root}>
-            {isSubmitting && <LinearProgress className={classes.progress}/>}
+            {/* {isSubmitting && <LinearProgress className={classes.progress}/>} */}
 
             <Avatar className={classes.avatar}>
                 <LockOutlined></LockOutlined>
@@ -102,28 +94,18 @@ function RegisterForm(props) {
                 component='h3'
                 varrian='h5'
             >
-                Create An Account
+               Sign In
             </Typography>
 
             <form onSubmit={form.handleSubmit(handleSubmit)}>
                 <InputField
-                    name='fullName'
-                    label='Full Name'
-                    form={form}
-                />
-                <InputField
-                    name='email'
+                    name='identifier'
                     label='Email'
                     form={form}
                 />
                 <PasswordField
                     name='password'
                     label='Password'
-                    form={form}
-                />
-                <PasswordField
-                    name='retypePassword'
-                    label='Retype Password'
                     form={form}
                 />
                 <Button
@@ -135,11 +117,11 @@ function RegisterForm(props) {
                     fullWidth
                     size='large'
                 >
-                    Create an Account
+                    Sign in
                 </Button>
             </form>
         </div>
     );
 }
 
-export default RegisterForm;
+export default LoginForm;

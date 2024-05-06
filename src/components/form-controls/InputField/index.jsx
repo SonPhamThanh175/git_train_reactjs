@@ -1,38 +1,4 @@
-// import { TextField } from '@material-ui/core';
-// import React from 'react';
-// import { Controller } from 'react-hook-form';
-// import PropTypes from 'prop-types';
 
-// InputField.propTypes = {
-//     form: PropTypes.object.isRequired,
-//     name: PropTypes.string.isRequired,
-
-//     label: PropTypes.string,
-//     disabled: PropTypes.object,
-// };
-
-// function InputField(props) {
-//     const { form, name, label, disabled } = props;
-//     const {errors} = form;
-//     const hasError =  errors[name];
-
-//     return (
-//         <Controller
-//             name={name}
-//             control={form.control}
-//             as={TextField}
-
-//             fullWidth
-//             label={label}
-//             disabled={disabled}
-
-//             error ={!!hasError}
-//             helperText={errors[name]?.message}
-//         />
-//     );
-// }
-
-// export default InputField;
 import { TextField } from '@material-ui/core';
 import React from 'react';
 import { Controller } from 'react-hook-form';
@@ -62,6 +28,16 @@ function InputField(props) {
             disabled={disabled}
             error={!!hasError}
             helperText={errors[name]?.message}
+            InputProps={{ // Sử dụng InputProps để tùy chỉnh giao diện của Input
+                className: 'custom-input', // Thêm class cho Input
+                style: {
+                    background: 'transparent',
+                    border:'none',
+                    outline: 'none',
+                    // border:'2px solid rgba(255,255,255,2)',
+                    borderRadius: '40px',
+                }
+            }}
         />
     );
 }

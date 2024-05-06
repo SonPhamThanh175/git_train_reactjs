@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    // background-color: url('./img/background.jpg') no-repeat;
+    // background-image: 'url(../img/background';
+    // background: 'url('background.jpg')'; /* Cách 3: Sử dụng ngắn gọn */
+    // background-repeat: no-repeat;
+    background-image: url('../../assets/img/background1.jpg'); // Đường dẫn tới hình ảnh
+    background-size: cover; // Đảm bảo ảnh nền phủ kín toàn bộ khu vực
+    background-repeat: no-repeat; // Ngăn chặn lặp lại ảnh nền
+    background-position: center; 
+    
+    &__login{
+        width: 420px;
+        background-color: transparent;
+        border: 2px solid rgba(255,255,255,0.2);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        color: aliceblue;
+        border-radius: 10px;
+        padding: 30px 40px;
+    }
+    &__register{
+        width: 420px;
+        background-color: transparent;
+        border: 2px solid rgba(255,255,255,0.2);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        color: aliceblue;
+        border-radius: 10px;
+        padding: 30px 40px;
+    }
+
+}
