@@ -52,6 +52,11 @@ function PasswordField(props) {
                         </InputAdornment>
                     }
                     label={label}
+                    sx={{ background: 'transparent',
+                    border:'none',
+                    outline: 'none',
+                    // border:'2px solid rgba(255,255,255,2)',
+                    borderRadius: '40px', }} 
                 />
             </FormControl>
     );
