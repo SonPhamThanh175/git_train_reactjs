@@ -38,7 +38,7 @@ const userSlice = createSlice({
     // Truyền vào cái name , initialState (Có thể là number hoặc string , object ,...)
     name: 'user',
     initialState: {
-        current:JSON.parse(localStorage.getItem(StorageKeys.USER)) || {} ,
+        current: JSON.parse(localStorage.getItem(StorageKeys.USER)) || {} ,
         settings:{},
     } ,
 
@@ -62,10 +62,10 @@ const userSlice = createSlice({
     reducers: {
       logout(state){
         //clear local storage
-
-        //reset state.current
         localStorage.removeItem(StorageKeys.TOKEN);
         localStorage.removeItem(StorageKeys.USER);
+        
+        //reset state.current
         state.current = {};
         state.settings = {};
       }

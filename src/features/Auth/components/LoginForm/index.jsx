@@ -75,8 +75,8 @@ function LoginForm(props) {
         }
 
         form.reset();
-        // Sau khi dang ki thanh cong thi chuyen ve trang Albums
-        // history.push('/albums');
+        // Sau khi dang ki thanh cong thi chuyen ve trang Product
+        // history.push('/products');
     };
     const history = useHistory()
     // const {isSubmitting} = form.formState

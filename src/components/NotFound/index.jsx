@@ -18,7 +18,6 @@ function NotFound(props) {
     const [mode, setMode] = useState(MODE.LOGIN);
     return (
         <div className='wrapper'>
-            {/* NOT FOUND! */}
             {mode === MODE.REGISTER && (
                 <>
                     <div className='wrapper__register'>

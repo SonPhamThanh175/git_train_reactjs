@@ -17,6 +17,7 @@ import {   IconButton, Menu, MenuItem } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
 import { logout } from 'features/Auth/userSlice';
 import HomeIcon from '@mui/icons-material/Home';
+import logo from '../../assets/img/logo.jpg'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,14 +32,15 @@ const useStyles = makeStyles((theme) => ({
         // borderRadius: 3,
         // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
         // color: 'white',
-        // padding: '0 30px',
+        padding: '0 30px',
         // backgroundColor: 'transparent', // Đặt màu nền là trong suốt
         // boxShadow: 'none', // Loại bỏ đổ bóng
         // backdropFilter: 'blur(10px)', 
     },
     menuButton: {
         marginRight: theme.spacing(2),
-        color:'black'
+        color:'black',
+        width: theme.spacing(8)
     },
     title: {
         flexGrow: 1,
@@ -87,13 +89,15 @@ export default function ButtonAppBar() {
                 // className={classes.appBar} 
                 className='appBar' 
                 sx={{  
-                    backgroundColor: 'transparent', // Đặt màu nền là trong suốt
-                    boxShadow: 'none', // Loại bỏ đổ bóng
+                    // backgroundColor: 'transparent',
+                    // backgroundColor: 'white',
+                    boxShadow: 'none', 
                     backdropFilter: 'blur(10px)' 
                 }}
             >
                 <Toolbar>
                     <HomeIcon className={classes.menuButton} />
+                    {/* <img src={logo} alt='MyLogo' className={classes.menuButton} /> */}
                     <Typography
                         variant='h6'
                         component='div'
@@ -115,7 +119,7 @@ export default function ButtonAppBar() {
                     </NavLink>
                     {!isLoggedIn && (
                         <Button 
-                            // color='inherit'  
+                            color='inherit'  
                             onClick={handleClickOpen}
                         >
                             Login
@@ -178,19 +182,5 @@ export default function ButtonAppBar() {
     );
 }
 
-// export default function ButtonAppBar() {
-//     return (
-//         <Box
-//             sx={{ 
-//                 width:'100%',
-//                 // height:(theme) => theme.trello.appBarHeight,
-//                 display:'flex',
-//                 alignItems:'center',
-//             }}
-//         >
-//             <Box>Trello</Box>
-//             <Box></Box>
-//         </Box>
-//     )
-// }
+
 
