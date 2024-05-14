@@ -8,7 +8,7 @@ InputField.propTypes = {
     form: PropTypes.object.isRequired,
     name: PropTypes.string.isRequired,
     label: PropTypes.string,
-    disabled: PropTypes.bool, // Sửa thành bool thay vì object
+    disabled: PropTypes.bool, 
 };
 
 function InputField(props) {
@@ -28,8 +28,8 @@ function InputField(props) {
             disabled={disabled}
             error={!!hasError}
             helperText={errors[name]?.message}
-            InputProps={{ // Sử dụng InputProps để tùy chỉnh giao diện của Input
-                className: 'custom-input', // Thêm class cho Input
+            InputProps={{ 
+                className: 'custom-input', 
                 style: {
                     background: 'transparent',
                     border:'none',
