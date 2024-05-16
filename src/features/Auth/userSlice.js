@@ -8,8 +8,7 @@ export const register = createAsyncThunk(
       // console.log('payload',payload);
         //Call API to register
         const data = await userApi.register(payload);
-        // console.log('data',data);
-
+        console.log("createAsyncThunk :" ,data);
         // Save data to local storage
         localStorage.setItem(StorageKeys.TOKEN, data.jwt);
         localStorage.setItem(StorageKeys.USER, JSON.stringify(data.user));

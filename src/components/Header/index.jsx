@@ -18,6 +18,7 @@ import { AccountCircle } from '@material-ui/icons';
 import { logout } from 'features/Auth/userSlice';
 import HomeIcon from '@mui/icons-material/Home';
 import logo from '../../assets/img/logo.jpg'
+import { HomeOutlined } from '@ant-design/icons';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -38,9 +39,9 @@ const useStyles = makeStyles((theme) => ({
         // backdropFilter: 'blur(10px)', 
     },
     menuButton: {
-        marginRight: theme.spacing(2),
-        color:'black',
-        width: theme.spacing(8)
+        // marginRight: theme.spacing(2),
+        // color:'black',
+        width: theme.spacing(4)
     },
     title: {
         flexGrow: 1,
@@ -62,7 +63,7 @@ export default function ButtonAppBar() {
     const history = useHistory();
     const handleClickOpen = () => {
         // setOpen(true);
-        history.push('/NotFound');
+        history.push('/');
     };
 
     const handleClose = () => {
@@ -80,6 +81,8 @@ export default function ButtonAppBar() {
     const handleLogoutClick = () => {
         const action = logout()
         dispatch(action)
+        handleCloseMenu();
+        history.push('/');
     }
     const classes = useStyles();
     return (
@@ -96,14 +99,15 @@ export default function ButtonAppBar() {
                 }}
             >
                 <Toolbar>
-                    <HomeIcon className={classes.menuButton} />
+                    {/* <HomeIcon className={classes.menuButton} /> */}
+                    <HomeOutlined className={classes.menuButton}/>
                     {/* <img src={logo} alt='MyLogo' className={classes.menuButton} /> */}
                     <Typography
                         variant='h6'
                         component='div'
                         sx={{ flexGrow: 1 }}
                     >
-                        <Link to='/'>Font-end</Link>
+                        <Link to='/products'>Font-end</Link>
                     </Typography>
                     <NavLink
                         to='/todos'

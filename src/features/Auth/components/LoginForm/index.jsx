@@ -24,8 +24,8 @@ const useStyles = makeStyles(theme => ({
         color:'#333'
     },
     submit: {
-        marginTop: theme.spacing(2),
-        borderRadius: '40px',
+        marginTop: theme.spacing(2) ,
+        borderRadius: '40px !important',
         boxShadow:'0 0 10px rgba(0,0,0,.1)',
         cursor: 'pointer',
         color:'#333'
