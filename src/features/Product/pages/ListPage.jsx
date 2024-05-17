@@ -6,6 +6,7 @@ import ProductList from '../components/ProductList';
 import { Pagination } from '@mui/material';
 import ProductSort from '../components/ProductSort';
 import ProductFilters from '../components/ProductFilters';
+import MenuSkeletonList from '../components/MenuSkeletonList';
 
 const useStyles = makeStyles(theme => ({
     root: {},
@@ -27,6 +28,7 @@ const useStyles = makeStyles(theme => ({
 function ListPage(props) {
     const classes = useStyles();
 
+    // const [productFilters,setProductFilters] = useState([])
     const [productList,setProductList] = useState([])
     const [pagination,setPagination] = useState({
         limit: 9,
@@ -77,7 +79,8 @@ function ListPage(props) {
             <Grid container spacing={1}>
                 <Grid item className={classes.left}>
                     <Paper elevation={0}>
-                        <ProductFilters filters={filters} onChange={handleFiltersChange}/>
+                        {/* <ProductFilters filters={filters} onChange={handleFiltersChange}/> */}
+                            {loading ? <MenuSkeletonList length={6}/> : <ProductFilters filters={filters} onChange={handleFiltersChange}/>}
                     </Paper>
                 </Grid>
                 <Grid item className={classes.right}>
