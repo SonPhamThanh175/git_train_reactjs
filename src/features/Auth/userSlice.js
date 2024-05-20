@@ -42,22 +42,6 @@ const userSlice = createSlice({
     } ,
 
     // Reducer là 1 object -> Mỗi key là 1 trường hợp ( là 1 hàm  )
-<<<<<<< HEAD
-    reducers: {},
-    // extraReducers: (builder) => {
-    //     builder.addCase(register.fulfilled, (state, action) => {
-    //       state.current = action.payload;
-    //       // state.current.push(action.payload)
-    //     });
-    //   },
-    extraReducers: (builder) => {
-      // Add reducers for additional action types here, and handle loading state as needed
-        builder.addCase(register.fulfilled, (state, action) => {
-        // Add user to the state array
-        state.current = action.payload;
-      })
-    },
-=======
     reducers: {
       logout(state){
         //clear local storage
@@ -87,7 +71,6 @@ const userSlice = createSlice({
               state.current = action.payload;
           });
   }
->>>>>>> SonDev
 });
 const { actions, reducer } = userSlice ;
 export const {logout} =actions
