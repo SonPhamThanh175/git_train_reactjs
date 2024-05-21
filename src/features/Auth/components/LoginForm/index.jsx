@@ -113,7 +113,7 @@ function LoginForm(props) {
                     type='submit'
                     className={classes.submit}
                     variant='contained'
-                    color='white'
+                    color='default'
                     fullWidth
                     size='large'
                 >
