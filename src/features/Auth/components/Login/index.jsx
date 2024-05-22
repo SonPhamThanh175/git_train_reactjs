@@ -2,9 +2,8 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import { login } from 'features/Auth/userSlice';
 import { useSnackbar } from 'notistack';
 import { useDispatch, useSelector } from 'react-redux';
-import LoginForm from '../LoginForm';
-import { Button, IconButton } from '@material-ui/core';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import LoginForm from '../LoginForm';
 
 // function Login(props) {
 //   //Test1 
@@ -48,7 +47,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 // export default Login
 
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 // Import các dependencies khác...
 
 function Login(props) {
