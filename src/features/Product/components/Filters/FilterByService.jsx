@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import {
     Box,
-    Button,
     Checkbox,
     FormControlLabel,
-    TextField,
     Typography,
-    makeStyles,
+    makeStyles
 } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 FilterByService.propTypes = {
     filters: PropTypes.object,

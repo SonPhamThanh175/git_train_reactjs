@@ -9,6 +9,7 @@ import ErrorFeature from './components/PageError';
 import AlbumFeature from './features/Album/pages';
 import LoginFeature from './features/Auth/components/Login';
 import TodoFeature from './features/Todo/pages';
+import CartFeatures from 'features/Cart';
 
 function App() {
 
@@ -41,7 +42,12 @@ function App() {
                     />
                     <Route 
                         path='/products'
-                        component={ProductFeature} />
+                        component={ProductFeature} 
+                    />
+                    <Route 
+                        path='/cart'
+                        component={CartFeatures} 
+                    />
                 </Switch>   
         </div>
     );

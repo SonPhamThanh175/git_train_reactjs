@@ -29,6 +29,7 @@ function Product({ product }) {
             <Box
                 padding={1}
                 minHeight='215px'
+                style={{cursor: 'pointer'}}
             >
                 <img
                     src={thumbnailUrl}
