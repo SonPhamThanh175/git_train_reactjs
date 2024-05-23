@@ -66,8 +66,6 @@ function LoginForm(props) {
         // shouldUnregister: true,
       })
       
-    
-      
       const handleSubmit = async (values) => {
         const { onSubmit } = props;
         if (onSubmit) {
