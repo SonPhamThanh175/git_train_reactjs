@@ -38,7 +38,7 @@ function ProductMenu(props) {
             <Link component={NavLink} to ={url} exact>Description</Link>
         </li>
         <li>
-            <Link component={NavLink} to ={`${url}/additioneal`} exact>Additional Infomation</Link>
+            <Link component={NavLink} to ={`${url}/additional`} exact>Additional Infomation</Link>
         </li>
         <li>
             <Link component={NavLink} to ={`${url}/reviews`} exact>Reviews</Link>

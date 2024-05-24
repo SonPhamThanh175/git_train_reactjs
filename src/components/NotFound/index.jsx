@@ -1,10 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Register from 'features/Auth/components/Register';
-import Login from 'features/Auth/components/Login';
-import { useState } from 'react';
 import { Box } from '@material-ui/core';
 import Button from '@mui/material/Button';
+import Login from 'features/Auth/components/Login';
+import Register from 'features/Auth/components/Register';
+import { useState } from 'react';
 import './styles.scss';
 
 NotFound.propTypes = {};

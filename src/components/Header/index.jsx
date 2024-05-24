@@ -1,4 +1,7 @@
+import { HomeOutlined } from '@ant-design/icons';
+import { IconButton, Menu, MenuItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { AccountCircle } from '@material-ui/icons';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -7,18 +10,12 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import * as React from 'react';
+import { logout } from 'features/Auth/userSlice';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Register from '../../features/Auth/components/Register';
 import styles from './styles.module.css';
-import { useDispatch, useSelector } from 'react-redux';
-import {   IconButton, Menu, MenuItem } from '@material-ui/core';
-import { AccountCircle } from '@material-ui/icons';
-import { logout } from 'features/Auth/userSlice';
-import HomeIcon from '@mui/icons-material/Home';
-import logo from '../../assets/img/logo.jpg'
-import { HomeOutlined } from '@ant-design/icons';
 
 
 const useStyles = makeStyles((theme) => ({

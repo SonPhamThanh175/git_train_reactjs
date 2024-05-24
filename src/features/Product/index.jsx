@@ -1,9 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Route, useRouteMatch, Switch } from 'react-router-dom/cjs/react-router-dom.min'
-import ListPage from './pages/ListPage'
 import { Box } from '@material-ui/core'
+import { Route, Switch, useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min'
 import DetailPage from './pages/DetailPage'
+import ListPage from './pages/ListPage'
 
 ProductFeature.propTypes = {}
 

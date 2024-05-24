@@ -1,13 +1,11 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import InputField from '../../../../components/form-controls/InputField';
-import { Avatar, Button, LinearProgress, Typography, makeStyles } from '@material-ui/core';
+import { Avatar, Button, Typography, makeStyles } from '@material-ui/core';
 import { LockOutlined } from '@material-ui/icons';
 import PasswordField from 'components/form-controls/PasswordField';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import PropTypes from 'prop-types';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import InputField from '../../../../components/form-controls/InputField';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -76,7 +74,7 @@ function LoginForm(props) {
         // Sau khi dang ki thanh cong thi chuyen ve trang Product
         // history.push('/products');
     };
-    const history = useHistory()
+    // const history = useHistory()
     // const {isSubmitting} = form.formState
 
     return (
