@@ -92,9 +92,6 @@ function QuantityField(props) {
             error={hasError}
             size='small'
         >
-            <Typography>
-                 {label}
-            </Typography>
             <Controller
                 name={name}
                 control={form.control}

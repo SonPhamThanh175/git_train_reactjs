@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import StorageKeys from "constants/storage-key";
 
 // Tạo 1 Slice = hàm createSlice() của Redux
 const cartSlice = createSlice({
@@ -6,7 +7,8 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         showMiniCart: false,
-        cartItems: [],
+        cartItems:JSON.parse(localStorage.getItem(StorageKeys.CART)) || [],
+        // userId: null,
     } ,
 
     // Reducer là 1 object -> Mỗi key là 1 trường hợp ( là 1 hàm  )
@@ -30,7 +32,7 @@ const cartSlice = createSlice({
                 //add to cart
                 state.cartItems.push(newItem);
             }
-
+            // localStorage.setItem(StorageKeys.CART + state.userId, JSON.stringify(state.cartItems));
         },
 
         setQuantity(state,action){
@@ -51,6 +53,13 @@ const cartSlice = createSlice({
 });
 // Redux tự định nghĩa actions và reducer 
 const { actions , reducer } = cartSlice ;
-// Trong actions thì có increase ,decrease
-export const { showMiniCart, hideMiniCart} = actions
+// Trong actions thì có showMiniCart,hideMiniCart,addToCart,setQuantity,removeFromCart
+export const {  showMiniCart ,
+                hideMiniCart , 
+                addToCart , 
+                setQuantity , 
+                removeFromCart,
+                removeItem
+                } = actions
+
 export default reducer

@@ -1,6 +1,5 @@
 import { Box, Container, Grid, LinearProgress, Paper, makeStyles } from '@material-ui/core';
 import { Route, Switch, useRouteMatch } from 'react-router-dom/cjs/react-router-dom.min';
-import AddToCart from '../components/AddToCart';
 import ProductAdditional from '../components/ProductAdditional';
 import ProductDescription from '../components/ProductDescription';
 import ProductInfo from '../components/ProductInfo';
@@ -8,6 +7,10 @@ import ProductMenu from '../components/ProductMenu';
 import ProductReviews from '../components/ProductReviews';
 import ProductThumnail from '../components/ProductThumnail';
 import useProductDetail from '../hooks/useProductDetail';
+import { useDispatch } from 'react-redux';
+import { addToCart, showMiniCart } from 'features/Cart/cartSlice';
+import AddToCart from '../components/AddToCart';
+import { enqueueSnackbar } from 'notistack';
 
 
 const useStyles = makeStyles(theme => ({
@@ -35,6 +38,7 @@ const useStyles = makeStyles(theme => ({
 
 function DetailPage() {
     const classes = useStyles();
+    const dispatch = useDispatch();
     const {
         params : {productId},
         url,
@@ -50,7 +54,17 @@ function DetailPage() {
     }
 
     const handleAddToCartSubmit = (formValue) => {
-        console.log('formValue',formValue);
+        // console.log('formValue',formValue);
+        const action = addToCart({
+            id: product.id,
+            product,
+            quantity:formValue.quantity,
+        })
+        const actionShowMiniCart = showMiniCart()
+        dispatch(action)
+        dispatch(actionShowMiniCart)
+        enqueueSnackbar('Đã thêm vào giỏ hàng !!!',{variant:'success'})
+
     }
 
   return (

@@ -13,7 +13,7 @@ PasswordField.propTypes = {
     form: PropTypes.object.isRequired,
     name: PropTypes.string.isRequired,
     label: PropTypes.string,
-    disabled: PropTypes.bool, // Sửa thành bool thay vì object
+    disabled: PropTypes.bool, 
 };
 
 function PasswordField(props) {

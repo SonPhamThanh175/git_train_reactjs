@@ -1,7 +1,8 @@
 import { HomeOutlined } from '@ant-design/icons';
-import { IconButton, Menu, MenuItem } from '@material-ui/core';
+import { Badge, IconButton, Menu, MenuItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { AccountCircle } from '@material-ui/icons';
+import { AccountCircle, ShoppingCart } from '@material-ui/icons';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -13,10 +14,11 @@ import Typography from '@mui/material/Typography';
 import { logout } from 'features/Auth/userSlice';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, NavLink, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import Register from '../../features/Auth/components/Register';
-import styles from './styles.module.css';
-
+import { cartItemsCountSelector } from 'features/Cart/selectors';
+import { showMiniCart } from 'features/Cart/cartSlice';
+import Snackbar from '@mui/material/Snackbar';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,26 +35,29 @@ const useStyles = makeStyles((theme) => ({
         padding: '0 30px',
         // backgroundColor: 'transparent', // Đặt màu nền là trong suốt
         // boxShadow: 'none', // Loại bỏ đổ bóng
-        // backdropFilter: 'blur(10px)', 
+        // backdropFilter: 'blur(10px)',
     },
     menuButton: {
         // marginRight: theme.spacing(2),
         // color:'black',
-        width: theme.spacing(4)
+        width: theme.spacing(4),
     },
     title: {
         flexGrow: 1,
     },
     link: {
-        color:'black',
-    }
+        color: 'black',
+    },
 }));
 
-
-export default function ButtonAppBar() {
-    const loggedInUser = useSelector(state => state.user.current);
+export default function Header() {
+    const loggedInUser = useSelector((state) => state.user.current);
     const isLoggedIn = !!loggedInUser.id;
     const dispatch = useDispatch();
+
+    const cartItemsCount = useSelector(cartItemsCountSelector);
+    const notifications = useSelector(showMiniCart);
+    // console.log(notifications);
 
     const [open, setOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -68,36 +73,40 @@ export default function ButtonAppBar() {
     };
 
     const handleUserClick = (e) => {
-        setAnchorEl(e.currentTarget)
-    }
+        setAnchorEl(e.currentTarget);
+    };
 
     const handleCloseMenu = () => {
-        setAnchorEl(null)
+        setAnchorEl(null);
     };
 
     const handleLogoutClick = () => {
-        const action = logout()
-        dispatch(action)
+        const action = logout();
+        dispatch(action);
         handleCloseMenu();
         history.push('/');
-    }
+    };
+
+    const handleCartClick = () => {
+        history.push('/cart');
+    };
     const classes = useStyles();
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar 
-                position='static' 
-                // className={classes.appBar} 
-                className='appBar' 
-                sx={{  
+            <AppBar
+                position='static'
+                // className={classes.appBar}
+                className='appBar'
+                sx={{
                     // backgroundColor: 'transparent',
                     // backgroundColor: 'white',
-                    boxShadow: 'none', 
-                    backdropFilter: 'blur(10px)' 
+                    boxShadow: 'none',
+                    backdropFilter: 'blur(10px)',
                 }}
             >
                 <Toolbar>
                     {/* <HomeIcon className={classes.menuButton} /> */}
-                    <HomeOutlined className={classes.menuButton}/>
+                    <HomeOutlined className={classes.menuButton} />
                     {/* <img src={logo} alt='MyLogo' className={classes.menuButton} /> */}
                     <Typography
                         variant='h6'
@@ -106,7 +115,7 @@ export default function ButtonAppBar() {
                     >
                         <Link to='/products'>Font-end</Link>
                     </Typography>
-                    <NavLink
+                    {/* <NavLink
                         to='/todos'
                         className={styles.link}
                     >
@@ -117,43 +126,69 @@ export default function ButtonAppBar() {
                         className={styles.link}
                     >
                         <Button color='inherit'>Album</Button>
-                    </NavLink>
+                    </NavLink> */}
+
+                    <IconButton
+                        size='large'
+                        aria-label='show 4 new mails'
+                        color='inherit'
+                        onClick={handleCartClick}
+                    >
+                        <Badge
+                            badgeContent={cartItemsCount}
+                            color='error'
+                        >
+                            <ShoppingCart />
+                        </Badge>
+                    </IconButton>
+                    <IconButton
+                        size='large'
+                        aria-label='show 17 new notifications'
+                        color='inherit'
+                    >
+                        <Badge
+                            badgeContent={17}
+                            color='error'
+                        >
+                            <NotificationsIcon />
+                        </Badge>
+                    </IconButton>
                     {!isLoggedIn && (
-                        <Button 
-                            color='inherit'  
+                        <Button
+                            color='inherit'
                             onClick={handleClickOpen}
                         >
                             Login
                         </Button>
                     )}
                     {isLoggedIn && (
-                        <IconButton 
+                        <IconButton
                             // color='inherit'
                             onClick={handleUserClick}
                         >
-                            <AccountCircle/>
+                            <AccountCircle />
                         </IconButton>
                     )}
                 </Toolbar>
             </AppBar>
             <Menu
-                    keepMounted
-                    anchorEl={anchorEl}
-                    open={Boolean(anchorEl)}
-                    onClose={handleCloseMenu}
-                    anchorOrigin={{
-                        vertical: 'bottom',
-                        horizontal: 'right',
-                      }}
-                      transformOrigin={{
-                        vertical: 'top',
-                        horizontal: 'right',
-                      }}
-                      getContentAnchorEl={null}
-                  >
-                    <MenuItem onClick={handleCloseMenu}>Profile</MenuItem>
-                    <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
-                    <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
+                keepMounted
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleCloseMenu}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'right',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                }}
+                getContentAnchorEl={null}
+            >
+                <MenuItem onClick={handleCloseMenu}>Profile</MenuItem>
+                <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
+                <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
             </Menu>
             <Dialog
                 disableEscapeKeyDown
@@ -173,7 +208,7 @@ export default function ButtonAppBar() {
                 }}
             >
                 <DialogContent>
-                    <Register/>
+                    <Register />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose}>Cancel</Button>
@@ -182,6 +217,3 @@ export default function ButtonAppBar() {
         </Box>
     );
 }
-
-
-

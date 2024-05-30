@@ -2,14 +2,14 @@ import { createSelector } from "@reduxjs/toolkit";
 
 const cartItemsSelector = (state) => state.cart.cartItems;
 
-//Count number of products in cart 
+// Đếm số lượng sản phẩm trong giỏ hàng
 export const cartItemsCountSelector = createSelector(
     cartItemsSelector,
-    (cartItems) => cartItems.reducer((count, item) => count +item.quantity,0)
-)
+    (cartItems) => cartItems.reduce((count, item) => count + item.quantity, 0)
+);
 
-//Calculate total of cart 
+// Tính tổng giá trị của giỏ hàng
 export const cartTotalSelector = createSelector(
     cartItemsSelector,
-    (cartItems) => cartItems.reducer((total, item) => total +(item.salePrice * item.quantity),0)
-)
+    (cartItems) => cartItems.reduce((total, item) => total + (item.product.salePrice * item.quantity), 0)
+);
