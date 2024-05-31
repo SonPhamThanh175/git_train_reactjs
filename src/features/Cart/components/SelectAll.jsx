@@ -28,16 +28,16 @@ const useStyles = makeStyles((theme) => ({
     },
     checkBox: {},
     price: {
-        marginLeft: '195px',
+        marginLeft: '200px',
     },
     box: {
         width: '196px',
     },
     quantity: {
-        marginLeft: '135px',
+        marginLeft: '95px',
     },
     priceTotal: {
-        marginLeft: '135px',
+        marginLeft: '55px',
     },
 }));
 

@@ -8,7 +8,6 @@ const cartSlice = createSlice({
     initialState: {
         showMiniCart: false,
         cartItems:JSON.parse(localStorage.getItem(StorageKeys.CART)) || [],
-        // userId: null,
     } ,
 
     // Reducer là 1 object -> Mỗi key là 1 trường hợp ( là 1 hàm  )
@@ -32,7 +31,7 @@ const cartSlice = createSlice({
                 //add to cart
                 state.cartItems.push(newItem);
             }
-            // localStorage.setItem(StorageKeys.CART + state.userId, JSON.stringify(state.cartItems));
+            localStorage.setItem(StorageKeys.CART, JSON.stringify(state.cartItems));
         },
 
         setQuantity(state,action){
@@ -44,11 +43,17 @@ const cartSlice = createSlice({
             }
         },
 
-        removeFromCart(state,action){
+        // removeFromCart(state,action){
+        //     const idNeedRemove = action.payload;
+        //     state.cartItems = state.cartItems.filter(x => x.id !== idNeedRemove)
+        //     localStorage.removeItem(StorageKeys.CART);
+        // },
+        removeFromCart(state, action) {
             const idNeedRemove = action.payload;
-            state.cartItems = state.cartItems.filter(x => x.id !== idNeedRemove)
+            state.cartItems = state.cartItems.filter(x => x.id !== idNeedRemove);
+            localStorage.setItem(StorageKeys.CART, JSON.stringify(state.cartItems));
         },
-
+        
     },
 });
 // Redux tự định nghĩa actions và reducer 
@@ -58,8 +63,8 @@ export const {  showMiniCart ,
                 hideMiniCart , 
                 addToCart , 
                 setQuantity , 
-                removeFromCart,
-                removeItem
+                removeFromCart ,
+                removeItem ,
                 } = actions
 
 export default reducer

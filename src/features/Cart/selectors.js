@@ -13,3 +13,14 @@ export const cartTotalSelector = createSelector(
     cartItemsSelector,
     (cartItems) => cartItems.reduce((total, item) => total + (item.product.salePrice * item.quantity), 0)
 );
+
+// originalPrice
+export const cartTotalOriginalPriceSelector = createSelector(
+    cartItemsSelector,
+    (cartItems) => cartItems.reduce((total, item) => total + (item.product.originalPrice * item.quantity), 0)
+);
+// salePrice
+export const cartTotalSalePriceSelector = createSelector(
+    cartItemsSelector,
+    (cartItems) => cartItems.reduce((total, item) => total + (item.product.salePrice * item.quantity), 0)
+);

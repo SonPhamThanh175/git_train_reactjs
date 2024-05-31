@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
         width: '80px',
     },
     details: {
-        marginLeft: theme.spacing(2),
+        // marginLeft: theme.spacing(2),
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
@@ -44,6 +44,9 @@ const useStyles = makeStyles(theme => ({
     },
     price: {
         fontWeight: 'bold',
+    },
+    quantity:{
+        marginLeft: theme.spacing(2),
     },
     total:{
         fontWeight: 'bold',
@@ -62,6 +65,7 @@ function ItemCart({ data,onSubmit = null }) {
      })
      const dispatch = useDispatch();
 
+     console.log('data',data.quantity);
      const handleRemoveItem = (id) => {
         dispatch(removeFromCart(id));
         enqueueSnackbar('Đã xóa khỏi giỏ hàng !',{variant:'error'})
@@ -71,19 +75,21 @@ function ItemCart({ data,onSubmit = null }) {
     const cartItemsCount = useSelector(cartItemsCountSelector);
 
  
-     const form = useForm({
-         defaultValues: {
-             quantity: cartItemsCount,
-         },
-         resolver: yupResolver(schema),
-         // shouldUnregister: true,
-       })
+    //  const form = useForm({
+    //      defaultValues: {
+    //          quantity: cartItemsCount,
+    //      },
+    //      resolver: yupResolver(schema),
+    //      // shouldUnregister: true,
+    //    })
  
-       const handleSubmit = async (values) => {
-         if (onSubmit) {
-             await onSubmit(values);
-         }
-     };
+    //    const handleSubmit = async (values) => {
+    //      if (onSubmit) {
+    //          await onSubmit(values);
+    //      }
+    //  };
+
+
     return (
         <Box>
             {data.map(item => {
@@ -100,13 +106,14 @@ function ItemCart({ data,onSubmit = null }) {
                         <Box className={classes.details}>
                             <Box className={classes.productName}>{item.product.name}</Box>
                             <Box className={classes.price}>{formatPrice(item.product.salePrice)}</Box>
-                            <form onSubmit={form.handleSubmit(handleSubmit)}>
+                            {/* <form onSubmit={form.handleSubmit(handleSubmit)}>
                                 <QuantityField
                                     name='quantity'
                                     label='Quantity'
                                     form={form}
                                 />
-                             </form>
+                             </form> */}
+                             <Box className={classes.quantity}>{item.quantity}</Box>
                              <Box className={classes.total}>{formatPrice(item.product.salePrice * item.quantity)}</Box>
                              <IconButton onClick={() => handleRemoveItem(item.id)}>
                                 <DeleteForeverIcon />
