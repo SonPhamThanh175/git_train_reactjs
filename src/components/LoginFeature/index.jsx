@@ -5,8 +5,8 @@ import Register from 'features/Auth/components/Register';
 import { useState } from 'react';
 import './styles.scss';
 
-NotFound.propTypes = {};
-function NotFound(props) {
+LoginFeature.propTypes = {};
+function LoginFeature(props) {
     const MODE = {
         LOGIN: 'login',
         REGISTER: 'register',
@@ -60,4 +60,25 @@ function NotFound(props) {
     );
 }
 
-export default NotFound;
+export default LoginFeature;
+
+// import React from 'react';
+// import { Result, Button } from 'antd';
+// import { Link } from 'react-router-dom';
+
+// const LoginFeature = () => {
+//   return (
+//     <Result
+//       status="404"
+//       title="404"
+//       subTitle="Sorry, the page you visited does not exist."
+//       extra={
+//         <Link to="/products">
+//           <Button type="primary">Back Home</Button>
+//         </Link>
+//       }
+//     />
+//   );
+// };
+
+// export default LoginFeature;

@@ -65,7 +65,7 @@ function ItemCart({ data,onSubmit = null }) {
      })
      const dispatch = useDispatch();
 
-     console.log('data',data.quantity);
+    //  console.log('data',data.quantity);
      const handleRemoveItem = (id) => {
         dispatch(removeFromCart(id));
         enqueueSnackbar('Đã xóa khỏi giỏ hàng !',{variant:'error'})
@@ -96,10 +96,11 @@ function ItemCart({ data,onSubmit = null }) {
                 const thumbnailUrl = item.product.thumbnail && item.product.thumbnail.formats.thumbnail
                     ? `${STATIC_HOST}${item.product.thumbnail.formats.thumbnail.url}`
                     : THUMBNAIL_PLACEHOLDER;
+                    // console.log('item ',item.id);
 
                 return (
                     <Box key={item.id} className={classes.root}>
-                        <Checkbox color='primary' />
+                        {/* <Checkbox color='primary' value={item.id} /> */}
                         <Box className={classes.thumbnail}>
                             <img src={thumbnailUrl} alt={item.product.name} width="100%" />
                         </Box>

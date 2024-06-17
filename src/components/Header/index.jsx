@@ -128,19 +128,36 @@ export default function Header() {
                         <Button color='inherit'>Album</Button>
                     </NavLink> */}
 
-                    <IconButton
-                        size='large'
-                        aria-label='show 4 new mails'
-                        color='inherit'
-                        onClick={handleCartClick}
-                    >
-                        <Badge
-                            badgeContent={cartItemsCount}
-                            color='error'
+                    {isLoggedIn && (
+                        <IconButton
+                            size='large'
+                            aria-label='show 4 new mails'
+                            color='inherit'
+                            onClick={handleCartClick}
                         >
-                            <ShoppingCart />
-                        </Badge>
-                    </IconButton>
+                            <Badge
+                                badgeContent={cartItemsCount}
+                                color='error'
+                            >
+                                <ShoppingCart />
+                            </Badge>
+                        </IconButton>
+                    )}
+                    {!isLoggedIn && (
+                        <IconButton
+                            size='large'
+                            aria-label='show 4 new mails'
+                            color='inherit'
+                            onClick={handleCartClick}
+                        >
+                            <Badge
+                                badgeContent={0}
+                                color='error'
+                            >
+                                <ShoppingCart />
+                            </Badge>
+                        </IconButton>
+                    )}
                     <IconButton
                         size='large'
                         aria-label='show 17 new notifications'

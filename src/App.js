@@ -4,12 +4,13 @@ import { Redirect, Route, Switch } from 'react-router-dom/cjs/react-router-dom.m
 // import Footer from './components/Footer';
 import ProductFeature from 'features/Product';
 import Header from './components/Header';
-import NotFound from './components/NotFound';
+import LoginFeature from './components/LoginFeature';
 import ErrorFeature from './components/PageError';
 import AlbumFeature from './features/Album/pages';
-import LoginFeature from './features/Auth/components/Login';
+// import LoginFeature from './features/Auth/components/Login';
 import TodoFeature from './features/Todo/pages';
 import CartFeatures from 'features/Cart';
+import NotFound from './components/PageError';
 
 function App() {
 
@@ -21,12 +22,12 @@ function App() {
                      <Redirect from = '/post-list/:postId' to = '/posts/:postId' exact />
                      <Route
                         path='/'
-                        component={NotFound}
+                        component={LoginFeature}
                         exact
                     />
                     <Route
-                        path='/login'
-                        component={LoginFeature}
+                        path='/error'
+                        component={NotFound}
                     />
                     <Route
                         path='/todos'

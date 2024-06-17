@@ -13,13 +13,13 @@ ProductSkeletonList.defaultProps = {
 }
 function ProductSkeletonList({length}) {
   return (
-    <Box>
+    <Box sx={{maxWidth: 300, height: 400}}>
         <Grid container
             spacing={2}
         >
             {Array.from(new Array(length)).map((x,index) => (
                 <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
-                    <Box padding={1}>
+                    <Box padding={1} >
                         <Skeleton  variant='rect' width="100%" height={215}/>
                         <Skeleton />
                         <Skeleton  width="60%"/>

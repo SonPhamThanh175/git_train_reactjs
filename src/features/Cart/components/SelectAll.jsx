@@ -48,11 +48,11 @@ function SelectAll(props) {
 
     return (
         <Box className={classes.selectAll}>
-            <Checkbox
+            {/* <Checkbox
                 color='primary'
                 size='small'
                 style={{ height: '100%' }}
-            />
+            /> */}
             <Box className={classes.checkBox}>{`Tất cả (${cartItems.length} sản phẩm )`}</Box>
             <Box className={classes.price}>Đơn giá</Box>
             <Box className={classes.quantity}>Số lượng</Box>
