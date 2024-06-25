@@ -77,9 +77,27 @@ function ListPage(props) {
         (async () => {
             try {
                 const { data, pagination } = await productsApi.getAll(queryParams);
-                // console.log({data , pagination});
+
+// ==========================================================================================================================================
+
+                // Khi call Api tự viết , Api trả về không như mong đợi cần được fix phía Back-end liên quan đến dữ liệu trả về {data,pagination}
+
+                // console.log("ket qua call API ",{data , pagination});
+                console.log("data",data);
+                console.log("pagination",pagination);
+                
+                //API model
                 setProductList(data);
                 setPagination(pagination);
+
+                //API custom 
+                // setProductList(data.data);
+                // setPagination(data.pagination);
+
+
+// ==========================================================================================================================================
+
+
             } catch (error) {
                 console.log('Failed to get all products:', error);
             }

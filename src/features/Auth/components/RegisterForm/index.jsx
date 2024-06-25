@@ -66,7 +66,7 @@ function RegisterForm(props) {
             fullName: '',
             email: '',
             password: '',
-            retypePassword: '',
+            confirmPassword: '',
         },
         resolver: yupResolver(schema),
         // shouldUnregister: true,
@@ -120,8 +120,10 @@ function RegisterForm(props) {
                     form={form}
                 />
                 <PasswordField
-                    name='retypePassword'
+                    name='confirmPassword'
                     label='Retype Password'
+                    // name='confirmPassword'
+                    // label='Retype Password'
                     form={form}
                 />
                 <Button
@@ -141,3 +143,4 @@ function RegisterForm(props) {
 }
 
 export default RegisterForm;
+

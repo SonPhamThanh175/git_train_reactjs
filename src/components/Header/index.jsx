@@ -19,52 +19,53 @@ import Register from '../../features/Auth/components/Register';
 import { cartItemsCountSelector } from 'features/Cart/selectors';
 import { showMiniCart } from 'features/Cart/cartSlice';
 import Snackbar from '@mui/material/Snackbar';
+import logo from '../../assets/imgs/logo.jpg'; 
 
 const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
-        // backgroundColor: 'red',
     },
     appBar: {
-        // backgroundColor: theme.palette.secondary.main
-        // background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-        // border: 0,
-        // borderRadius: 3,
-        // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-        // color: 'white',
+        backgroundColor: '#ffffff',
+        boxShadow: 'none',
+        backdropFilter: 'blur(10px)',
         padding: '0 30px',
-        // backgroundColor: 'transparent', // Đặt màu nền là trong suốt
-        // boxShadow: 'none', // Loại bỏ đổ bóng
-        // backdropFilter: 'blur(10px)',
     },
     menuButton: {
-        // marginRight: theme.spacing(2),
-        // color:'black',
+        marginRight: theme.spacing(2),
+        color: 'black',
         width: theme.spacing(4),
     },
     title: {
         flexGrow: 1,
+        textDecoration: 'none',
+        color: 'black',
+        display: 'flex',
+        alignItems: 'center',
     },
     link: {
+        color: 'black',
+        textDecoration: 'none',
+        marginRight: theme.spacing(2),
+    },
+    iconButton: {
         color: 'black',
     },
 }));
 
 export default function Header() {
     const loggedInUser = useSelector((state) => state.user.current);
-    const isLoggedIn = !!loggedInUser.id;
+    const isLoggedIn = !!loggedInUser?.id;
     const dispatch = useDispatch();
 
     const cartItemsCount = useSelector(cartItemsCountSelector);
     const notifications = useSelector(showMiniCart);
-    // console.log(notifications);
 
     const [open, setOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
 
     const history = useHistory();
     const handleClickOpen = () => {
-        // setOpen(true);
         history.push('/');
     };
 
@@ -95,96 +96,52 @@ export default function Header() {
         <Box sx={{ flexGrow: 1 }}>
             <AppBar
                 position='static'
-                // className={classes.appBar}
-                className='appBar'
-                sx={{
-                    // backgroundColor: 'transparent',
-                    // backgroundColor: 'white',
-                    boxShadow: 'none',
-                    backdropFilter: 'blur(10px)',
-                }}
+                className={classes.appBar}
             >
                 <Toolbar>
-                    {/* <HomeIcon className={classes.menuButton} /> */}
-                    <HomeOutlined className={classes.menuButton} />
-                    {/* <img src={logo} alt='MyLogo' className={classes.menuButton} /> */}
-                    <Typography
-                        variant='h6'
-                        component='div'
-                        sx={{ flexGrow: 1 }}
-                    >
-                        <Link to='/products'>Font-end</Link>
-                    </Typography>
-                    {/* <NavLink
-                        to='/todos'
-                        className={styles.link}
-                    >
-                        <Button color='inherit'>Todo</Button>
-                    </NavLink>
-                    <NavLink
-                        to='/albums'
-                        className={styles.link}
-                    >
-                        <Button color='inherit'>Album</Button>
-                    </NavLink> */}
-
-                    {isLoggedIn && (
-                        <IconButton
-                            size='large'
-                            aria-label='show 4 new mails'
-                            color='inherit'
-                            onClick={handleCartClick}
-                        >
-                            <Badge
-                                badgeContent={cartItemsCount}
-                                color='error'
+                    <Link to='/' className={classes.title}>
+                        <img src={logo} alt='Logo' style={{ height: 40, marginRight: 10 }} />
+                        <Typography variant='h6' component='div'>
+                            Font-end
+                        </Typography>
+                    </Link>
+                    <div style={{ flexGrow: 1 }}></div>
+                    <Link to='/products' className={classes.link}>
+                        <Button>Products</Button>
+                    </Link>
+                    {isLoggedIn ? (
+                        <>
+                            <IconButton
+                                size='large'
+                                color='inherit'
+                                onClick={handleCartClick}
+                                className={classes.iconButton}
                             >
-                                <ShoppingCart />
-                            </Badge>
-                        </IconButton>
-                    )}
-                    {!isLoggedIn && (
-                        <IconButton
-                            size='large'
-                            aria-label='show 4 new mails'
-                            color='inherit'
-                            onClick={handleCartClick}
-                        >
-                            <Badge
-                                badgeContent={0}
-                                color='error'
+                                <Badge badgeContent={cartItemsCount} color='error'>
+                                    <ShoppingCart />
+                                </Badge>
+                            </IconButton>
+                            <IconButton
+                                size='large'
+                                color='inherit'
+                                className={classes.iconButton}
                             >
-                                <ShoppingCart />
-                            </Badge>
-                        </IconButton>
-                    )}
-                    <IconButton
-                        size='large'
-                        aria-label='show 17 new notifications'
-                        color='inherit'
-                    >
-                        <Badge
-                            badgeContent={17}
-                            color='error'
-                        >
-                            <NotificationsIcon />
-                        </Badge>
-                    </IconButton>
-                    {!isLoggedIn && (
-                        <Button
-                            color='inherit'
-                            onClick={handleClickOpen}
-                        >
+                                <Badge badgeContent={17} color='error'>
+                                    <NotificationsIcon />
+                                </Badge>
+                            </IconButton>
+                            <IconButton
+                                color='inherit'
+                                onClick={handleUserClick}
+                                className={classes.iconButton}
+                            >
+                                <AccountCircle />
+                            </IconButton>
+                        </>
+                    ) : (
+                        <Button color='inherit' onClick={handleClickOpen}>
                             Login
                         </Button>
-                    )}
-                    {isLoggedIn && (
-                        <IconButton
-                            // color='inherit'
-                            onClick={handleUserClick}
-                        >
-                            <AccountCircle />
-                        </IconButton>
                     )}
                 </Toolbar>
             </AppBar>

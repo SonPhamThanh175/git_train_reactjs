@@ -4,6 +4,7 @@ import Login from 'features/Auth/components/Login';
 import Register from 'features/Auth/components/Register';
 import { useState } from 'react';
 import './styles.scss';
+import { Typography } from '@material-ui/core';
 
 LoginFeature.propTypes = {};
 function LoginFeature(props) {
@@ -22,9 +23,9 @@ function LoginFeature(props) {
                         <Register />
 
                         <Box textAlign='center'>
-                            <text>
+                            <Typography variant="caption">
                                 Already have an account ?
-                            </text>
+                            </Typography>
                             <Button
                                 color='primary'
                                 onClick={() => setMode(MODE.LOGIN)}
@@ -42,9 +43,9 @@ function LoginFeature(props) {
                         <Login />
 
                         <Box textAlign='center'>
-                            <text>
+                            <Typography >
                                 Dont have an account ? 
-                            </text>
+                            </Typography>
                             <Button
                                 color='primary'
                                 onClick={() => setMode(MODE.REGISTER)}
